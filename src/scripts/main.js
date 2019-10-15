@@ -76,12 +76,12 @@ const students = [
 const article = document.querySelector('#container');
 
 
-const createStudentComponent = (score, student, subject, information) => {
+const createStudentComponent = (object) => {
     return `
     <div class='student'>
-        <h1 class='${score} xx-large'>${student}</h1>
-        <section class="bordered dashed section--padded">${subject}</section>
-        <aside class="pushRight">${information}</aside>
+        <h1 class='${object.status} xx-large'>${object.name}</h1>
+        <section class="bordered dashed section--padded">${object.subject}</section>
+        <aside class="pushRight">${object.info}</aside>
     </div>`
 }
 
@@ -91,9 +91,11 @@ for (const student of students) {
     let studentComponent = ""
     console.log(student)
     if (student.score >= 60) {
-        studentComponent = createStudentComponent('passing', student['name'], student['subject'], student['info']);
+        student['status'] = 'passing'
+        studentComponent = createStudentComponent(student);
     } else {
-        studentComponent = createStudentComponent('failing', student['name'], student['subject'], student['info']);
+        student['status'] = 'failing'
+        studentComponent = createStudentComponent(student);
     }
         article.innerHTML += studentComponent;
         // console.log(student['name']);
